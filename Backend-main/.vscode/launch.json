@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Team2WebsiteApplication<CameAlone>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.team2_website.camealone.Team2WebsiteApplication",
+            "projectName": "CameAlone",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
