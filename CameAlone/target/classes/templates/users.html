@@ -1,0 +1,33 @@
+<!-- src/main/resources/templates/users.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Users</h1>
+    <form action="/users" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <button type="submit" class="btn btn-primary">Add User</button>
+    </form>
+    <h2>User List</h2>
+    <ul class="list-group">
+        <li th:each="user : ${users}" class="list-group-item">
+            <span th:text="${user.name}">Name</span> - <span th:text="${user.email}">Email</span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
