@@ -129,8 +129,17 @@ public class LoginService {
     }
 
     // 회원 정보를 수정하는 함수
-    public void updateUserInfo(String newPassword, String confirmNewPassword) {
-        MemberDTO memberDTO=new MemberDTO();
-
+    public int updateUserInfo(String userId, String newPassword) {
+        // 회원 정보를 조회합니다.
+        MemberDTO memberDTO = mapper.findById(userId);
+        if (memberDTO != null) {
+            // 새로운 비밀번호를 암호화합니다.
+            BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+            String encodedPassword = encoder.encode(newPassword);
+            // 암호화된 비밀번호를 데이터베이스에 업데이트합니다.
+            return mapper.updatePassword(memberDTO.getId(), encodedPassword);
+        }
+        // 회원 정보가 없으면 0을 반환합니다.
+        return 0;
     }
 }

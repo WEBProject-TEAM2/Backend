@@ -9,6 +9,9 @@ public interface IMemberMapper {
     @Select("SELECT * FROM userinfo WHERE id = #{id}")
     MemberDTO login(String id);
 
+    @Select("SELECT userinfo.id, userinfo.email, userinfo.password, userinfo.phone from userinfo where id=#{id}")
+    MemberDTO findById(String id);
+
     @Select("SELECT * FROM userinfo WHERE email = #{email}")
     MemberDTO findByEmail(String email);
 
