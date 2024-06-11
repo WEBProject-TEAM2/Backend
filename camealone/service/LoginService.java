@@ -36,6 +36,26 @@ public class LoginService {
         if (memberDTO.getPassword() == null || memberDTO.getPassword().trim().isEmpty()) {
             return "비밀번호는 필수항목입니다";
         }
+
+        /*
+        //특수문자 목록
+        String[] specialChar={"!","@","#","$","%","^","&","*"};
+        // 특수문자가 하나라도 포함되어있는지 체크하는 용도
+        boolean isContainSpecialChar=false;
+
+        for (int i = 0; i < specialChar.length; i++) {
+            if (memberDTO.getPassword().contains(specialChar[i])) {
+                isContainSpecialChar=true; // 특수문자가 하나라도 있을경우
+                break; // 반복문을 빠져나감
+            }
+        }
+
+        // 특수문자가 하나도 없을 경우
+        if (!isContainSpecialChar){
+            return "비밀번호에 다음 특수문자를 포함해야합니다\n!, @, #, $, %, ^, &, *";
+        }
+         */
+
         if (memberDTO.getEmail() == null || memberDTO.getEmail().trim().isEmpty() || !memberDTO.getEmail().contains("@")) {
             return "유효하지 않은 이메일입니다";
         }
