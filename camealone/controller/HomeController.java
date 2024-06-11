@@ -2,6 +2,8 @@ package org.team2project.camealone.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +14,18 @@ import java.util.Map;
 
 @Controller
 public class HomeController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @GetMapping("/") //  메인페이지
-    public String home(Model model) {
+    public String home(Model model,HttpSession session) {
+        String id=(String) session.getAttribute("id");
+        String name=(String) session.getAttribute("name");
+
+        if (id!=null && name!=null) {
+            model.addAttribute("name", name);
+            model.addAttribute("id", id);
+            logger.info("id : "+id+" "+"name : "+name);
+        }
         return "Main";
     }
 

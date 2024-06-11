@@ -30,15 +30,12 @@ public class LoginService {
         if (memberDTO.getId() == null || memberDTO.getId().trim().isEmpty()) {
             return "아이디는 필수항목입니다";
         }
-
         if (memberDTO.getName() == null || memberDTO.getName().trim().isEmpty()) {
             return "이름은 필수항목입니다";
         }
-
         if (memberDTO.getPassword() == null || memberDTO.getPassword().trim().isEmpty()) {
             return "비밀번호는 필수항목입니다";
         }
-
         if (memberDTO.getEmail() == null || memberDTO.getEmail().trim().isEmpty() || !memberDTO.getEmail().contains("@")) {
             return "유효하지 않은 이메일입니다";
         }
@@ -132,17 +129,20 @@ public class LoginService {
     }
 
     // 회원 정보를 수정하는 함수
-    public int updateUserInfo(String userId, String newPassword) {
-        // 회원 정보를 조회합니다.
-        MemberDTO memberDTO = mapper.findById(userId);
-        if (memberDTO != null) {
-            // 새로운 비밀번호를 암호화합니다.
-            BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-            String encodedPassword = encoder.encode(newPassword);
-            // 암호화된 비밀번호를 데이터베이스에 업데이트합니다.
-            return mapper.updatePassword(memberDTO.getId(), encodedPassword);
+    public String updateUserInfo(MemberDTO memberDTO) {
+        String sessionId = request.getSession().getId();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if (sessionId == null) {
+            return "로그인이 필요합니다.";
+        }else {
+            if (encoder.matches(memberDTO.getPassword(), memberDTO.getPassword())) {
+                String updatePassword = mapper.updatePassword(memberDTO.getId(), memberDTO.getPassword());
+                logger.debug("회원 정보 수정 됨");
+                return updatePassword;
+            }else {
+                return "비밀번호를 알맞게 입력하세요";
+            }
         }
-        // 회원 정보가 없으면 0을 반환합니다.
-        return 0;
     }
 }
