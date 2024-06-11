@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
 @Controller
 public class HomeController {
     @GetMapping("/") //  메인페이지
-    public String home() {
+    public String home(Model model) {
         return "Main";
     }
 
