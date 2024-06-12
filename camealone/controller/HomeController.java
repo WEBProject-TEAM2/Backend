@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Controller
 public class HomeController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @GetMapping("/") //  메인페이지
     public String home(Model model,HttpSession session) {

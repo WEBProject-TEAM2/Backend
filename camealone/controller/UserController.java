@@ -37,7 +37,7 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout() {
         session.invalidate();
         return "redirect:/";
@@ -60,6 +60,13 @@ public class UserController {
             session.setAttribute("id", id); // 세션에 아이디 저장
             session.setMaxInactiveInterval(60 * 30); // 세션 유지 시간 : 60 * 30 = 1800초(30분)
             redirectAttributes.addFlashAttribute("msg", msg);
+
+            String name = mapper.findName(id);
+            logger.info("name : " + name);
+            logger.info("id : " + id);
+            if (name != null) {
+                session.setAttribute("name", name);
+            }
 
             SecurityContextHolder.getContext().setAuthentication(SecurityContextHolder.getContext().getAuthentication());
         } else {

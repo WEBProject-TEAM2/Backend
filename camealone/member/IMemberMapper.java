@@ -9,6 +9,9 @@ public interface IMemberMapper {
     @Select("SELECT * FROM userinfo WHERE id = #{id}")
     MemberDTO login(String id);
 
+    @Select("SELECT userinfo.id, userinfo.email, userinfo.password, userinfo.phone from userinfo where id=#{id}")
+    MemberDTO findById(String id);
+
     @Select("SELECT name from userinfo where id=#{id}")
     String findName(String id);
 
@@ -26,6 +29,6 @@ public interface IMemberMapper {
     int deleteMember(String id);
 
     // 회원정보 수정
-    @Update("UPDATE userinfo SET password=#{password} where id=#{id}")
-    String updatePassword(String id, String password);
+    @Update("UPDATE userinfo SET password=#{newPassword} where id=#{id}")
+    int updatePassword(String id, String newPassword);
 }
