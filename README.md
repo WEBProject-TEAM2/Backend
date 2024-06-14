@@ -4,7 +4,7 @@
     
 // CREATE USER 'springuser'@'localhost' IDENTIFIED BY 'password';
         
-// GRANT ALL PRIVILEGES ON springbootdb.* TO springuser'@'localhost';
+// GRANT ALL PRIVILEGES ON springbootdb.* TO 'springuser'@'localhost';
         
 // FLUSH PRIVILEGES;
 
